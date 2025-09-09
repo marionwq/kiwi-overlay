@@ -111,7 +111,7 @@
       document.getElementById("diff").innerText = data.dif;
 
       // Gara rimanente
-      document.getElementById("race").innerText = `残レース: ${data.left}`;
+      document.getElementById("race").innerText = `Races left: ${data.left}`;
 
       // Colore differenza (verde/giallo/rosso come bot)
       const diffValue = parseInt(data.dif.replace('+','')) || 0;
