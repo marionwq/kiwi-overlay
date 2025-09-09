@@ -1,1 +1,41 @@
-<script type="text/javascript" src="script.js"></script>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Overlay MK8</title>
+  <style>
+    body {
+      margin: 0;
+      background: rgba(0,0,0,0); /* trasparente per OBS */
+      font-family: sans-serif;
+      text-align: center;
+    }
+    .overlay-container {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-weight: bold;
+    }
+    .team-span { display: inline-block; }
+  </style>
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="script.js"></script> <!-- qui colleghi il tuo script -->
+</head>
+<body>
+  <!-- Contenitori per il numero di team -->
+  <div id="team-num-2" class="overlay-container">
+    <p class="team team-1"><span class="team-span">AAA</span></p>
+    <p class="score score-1">0</p>
+    <p class="team team-2"><span class="team-span">BBB</span></p>
+    <p class="score score-2">0</p>
+    <p class="dif">+0</p>
+    <p class="left-race">12</p>
+    <div class="win" style="display:none;">WIN!</div>
+  </div>
+
+  <div id="team-num-3" class="overlay-container">
+    <!-- qui aggiungi i team se necessario -->
+  </div>
+</body>
+</html>
