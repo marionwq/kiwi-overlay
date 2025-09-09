@@ -115,9 +115,9 @@
 
       // Colore differenza (verde/giallo/rosso come bot)
       const diffValue = parseInt(data.dif.replace('+','')) || 0;
-      let color = 'yellow';
-      if(diffValue > 0) color = 'green';
-      else if(diffValue < 0) color = 'red';
+      let color = '#FCF6C5';
+      if(diffValue > 0) color = '#DCEAC8';
+      else if(diffValue < 0) color = '#EE9A9A';
       document.getElementById("diff").style.color = color;
 
     } catch(e) {
