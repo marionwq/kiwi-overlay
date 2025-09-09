@@ -1,41 +1,101 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Kiwi Overlay MKWD</title>
-  <style>
-    body {
-      margin: 0;
-      background: rgba(0,0,0,0); /* trasparente per OBS */
-      font-family: sans-serif;
-      text-align: center;
-    }
-    .overlay-container {
-      display: none;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-    }
-    .team-span { display: inline-block; }
-  </style>
-  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-  <script src="script.js"></script> <!-- qui colleghi il tuo script -->
+<meta charset="UTF-8">
+<title>Overlay</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap'); /* esempio font */
+
+  body {
+    margin: 0;
+    background: transparent;
+    font-family: 'Press Start 2P', monospace;
+  }
+
+  #overlay {
+    width: 800px;
+    height: 250px;
+    position: relative;
+    border-radius: 25px;
+    background: rgba(30,30,30,0.8);
+    box-shadow: 3px 3px 8px rgba(0,0,0,0.5);
+    color: white;
+    overflow: hidden;
+  }
+
+  #title {
+    position: absolute;
+    top: 20px;
+    width: 100%;
+    text-align: center;
+    font-size: 48px;
+  }
+
+  #diff {
+    position: absolute;
+    top: 60px;
+    width: 100%;
+    text-align: center;
+    font-size: 28px;
+    color: white;
+  }
+
+  #scores {
+    position: absolute;
+    top: 100px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 30px;
+    font-size: 52px;
+    color: #BDBDBD;
+  }
+
+  #race {
+    position: absolute;
+    top: 180px;
+    width: 100%;
+    text-align: center;
+    font-size: 40px;
+    color: yellow;
+  }
+</style>
 </head>
 <body>
-  <!-- Contenitori per il numero di team -->
-  <div id="team-num-2" class="overlay-container">
-    <p class="team team-1"><span class="team-span">AAA</span></p>
-    <p class="score score-1">0</p>
-    <p class="team team-2"><span class="team-span">BBB</span></p>
-    <p class="score score-2">0</p>
-    <p class="dif">+0</p>
-    <p class="left-race">12</p>
-    <div class="win" style="display:none;">WIN!</div>
+<div id="overlay">
+  <div id="title">Team A vs Team B</div>
+  <div id="diff">(± 0)</div>
+  <div id="scores">
+    <span id="teamScore">0</span>
+    <span id="oppScore">0</span>
   </div>
+  <div id="race">1/12</div>
+</div>
 
-  <div id="team-num-3" class="overlay-container">
-    <!-- qui aggiungi i team se necessario -->
-  </div>
+<script>
+  async function loadOverlay() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const server = urlParams.get("server");
+    if(!server) return;
+
+    try {
+      const res = await fetch(`https://kiwi-overlay-default-rtdb.europe-west1.firebasedatabase.app/server/${server}.json`);
+      const data = await res.json();
+      if(!data) return;
+
+      document.getElementById("title").innerText = `${data.teams[0]} vs ${data.teams[1]}`;
+      document.getElementById("teamScore").innerText = data.scores[0];
+      document.getElementById("oppScore").innerText = data.scores[1];
+      document.getElementById("diff").innerText = data.dif;
+      document.getElementById("race").innerText = `残レース: ${data.left}`;
+
+    } catch(e) {
+      console.error("Errore caricamento overlay:", e);
+    }
+  }
+
+  loadOverlay();
+  setInterval(loadOverlay, 5000); // aggiorna ogni 5 secondi
+</script>
 </body>
 </html>
