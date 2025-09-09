@@ -107,10 +107,11 @@
       document.getElementById("oppScore").innerText = data.scores[1];
 
       // Differenza
-      document.getElementById("diff").innerText = data.dif;
+      let diffValue = Math.abs(parseInt(data.dif.replace('+','')) || 0);
+      document.getElementById("diff").innerText = `±${diffValue}`;
 
       // Gara rimanente
-      document.getElementById("race").innerText = `Races left: ${data.left}`;
+      document.getElementById("race").innerText = `Races left: ${data.left-1}`;
 
       // Colore differenza (verde/giallo/rosso come bot)
       const diffValue = parseInt(data.dif.replace('+','')) || 0;
@@ -125,7 +126,7 @@
   }
 
   loadOverlay();
-  setInterval(loadOverlay, 5000); // aggiorna ogni 5 secondi
+  setInterval(loadOverlay, 10000); // aggiorna ogni 5 secondi
 </script>
 </body>
 </html>
