@@ -94,6 +94,7 @@
   async function loadOverlay() {
     const urlParams = new URLSearchParams(window.location.search);
     const server = urlParams.get("server");
+    let isFirstRace = 1;
     if(!server) return;
 
     try {
@@ -112,9 +113,9 @@
       document.getElementById("diff").innerText = `±${diffAbs}`;
 
       // Gara rimanente
-      if (data.left === 12){
+      if (data.left === 12 && isFirstRace === 1){
         document.getElementById("race").innerText = `Races left: 12`;
-        data.left = 11;
+        let isFirstRace = 0;
       } else {
         document.getElementById("race").innerText = `Races left: ${data.left-1}`;
       }
