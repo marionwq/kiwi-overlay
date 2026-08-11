@@ -114,8 +114,9 @@
       // Gara rimanente
       if (data.left === 12){
         document.getElementById("race").innerText = `Races left: 12`;
+        data.left = 11;
       } else {
-        document.getElementById("race").innerText = `Races left: ${data.left-1}`;
+        document.getElementById("race").innerText = `Races left: ${data.left}`;
       }
       
 
