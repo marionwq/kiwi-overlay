@@ -82,12 +82,12 @@
 <body>
 <div id="overlay">
   <div id="title">Team A vs Team B</div>
-  <div id="diff">(±0)</div>
+  <div id="diff">±0</div>
   <div id="scores">
       <span id="teamScore" style="margin-left:20px;">0</span>
       <span id="oppScore" style="margin-right:20px;">0</span>
     </div>
-  <div id="race">1/12</div>
+  <div id="race">Races left: 12</div>
 </div>
 
 <script>
@@ -112,7 +112,12 @@
       document.getElementById("diff").innerText = `±${diffAbs}`;
 
       // Gara rimanente
-      document.getElementById("race").innerText = `Races left: ${data.left-1}`;
+      if (data.left === 12){
+        document.getElementById("race").innerText = `Races left: 12`;
+      } else {
+        document.getElementById("race").innerText = `Races left: ${data.left-1}`;
+      }
+      
 
       // Colore differenza (verde/giallo/rosso come bot)
       let color = '#FCF6C5';
