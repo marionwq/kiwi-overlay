@@ -113,12 +113,8 @@
       document.getElementById("diff").innerText = `±${diffAbs}`;
 
       // Gara rimanente
-      if (data.left === 12 && isFirstRace === 1){
-        document.getElementById("race").innerText = `Races left: 12`;
-        let isFirstRace = 0;
-      } else {
-        document.getElementById("race").innerText = `Races left: ${data.left-1}`;
-      }
+      document.getElementById("race").innerText = `Races left: ${data.left-1}`;
+      
 
       
 
